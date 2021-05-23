@@ -4,7 +4,7 @@ provider "azurerm" {
 
 variable "resource_group_name" {
   description = "The name used to identify the resource group"
-  default = "learn-d0e0a992-3190-4e33-9561-0189f5703c09"
+  default = "learn-40123826-446f-408d-8492-54798031c1c6"
 }
 
 # variable "resource_group_location" {
