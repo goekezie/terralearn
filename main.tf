@@ -86,7 +86,7 @@ resource "azurerm_local_network_gateway" "az" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
   gateway_address     = data.azurerm_public_ip.az.ip_address
-  address_space       = ["172.16.0.0/16"]
+  address_space       = ["172.17.0.0/16"]
 }
 
 resource "azurerm_virtual_network_gateway_connection" "az" {
@@ -111,7 +111,7 @@ resource "azurerm_virtual_network" "on" {
 resource "azurerm_subnet" "on" {
   name                 = "GatewaySubnet"
   resource_group_name  = data.azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.az.name
+  virtual_network_name = azurerm_virtual_network.on.name
   address_prefixes     = ["172.16.255.0/27"]
 }
 
@@ -155,7 +155,7 @@ data "azurerm_public_ip" "on" {
   resource_group_name = data.azurerm_resource_group.rg.name
 }
 
-output "public_ip_address" {
+output "on_public_ip_address" {
   value = data.azurerm_public_ip.on.ip_address
 }
 
@@ -164,7 +164,7 @@ resource "azurerm_local_network_gateway" "on" {
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
   gateway_address     = data.azurerm_public_ip.on.ip_address
-  address_space       = ["172.16.0.0/16"]
+  address_space       = ["172.16.255.0/27"]
 }
 
 resource "azurerm_virtual_network_gateway_connection" "on" {
